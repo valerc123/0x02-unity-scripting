@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+    }
+    void Update(){
+        if(health == 0){
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene("maze");
+            score = 0;
+            health = 5;
+        }
     }
     public void FixedUpdate(){
        // rb.velocity = new Vector3(speed, 0, speed);
