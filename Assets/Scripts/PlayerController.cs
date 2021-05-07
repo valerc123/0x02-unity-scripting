@@ -5,14 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public float speed;
     public Rigidbody rb;
     private int score = 0;
     public int health = 5;
+    private Vector3 move;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        speed = 20f;
     }
     void Update(){
+        move =  new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        
+        rb.AddForce(move * speed);
         if(health == 0){
             Debug.Log("Game Over!");
             SceneManager.LoadScene("maze");
@@ -21,8 +27,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void FixedUpdate(){
-       // rb.velocity = new Vector3(speed, 0, speed);
-
         if(Input.GetKey(KeyCode.A)){
             rb.AddForce(Vector3.left);
         }
