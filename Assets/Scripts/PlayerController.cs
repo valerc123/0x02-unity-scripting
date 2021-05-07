@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
-    //public float speed;
-    // Start is called before the first frame update
+    private int score = 0;
+   // public GameObject [] coin;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+       // coin = GameObject.FindGObjectsWithTag("Pickup");
     }
     public void FixedUpdate(){
        // rb.velocity = new Vector3(speed, 0, speed);
@@ -26,6 +27,13 @@ public class PlayerController : MonoBehaviour
         else if(Input.GetKey(KeyCode.D)){
             rb.AddForce(Vector3.right);
         }
+    }
+
+    void OnTriggerEnter(Collider other){
+        if (other.tag == "Pickup"){
+            score++;
+        }
+        Debug.Log("Score: " + score);
     }
 
 }
