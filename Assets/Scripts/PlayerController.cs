@@ -6,11 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
     private int score = 0;
-   // public GameObject [] coin;
+    public int health = 5;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-       // coin = GameObject.FindGObjectsWithTag("Pickup");
     }
     public void FixedUpdate(){
        // rb.velocity = new Vector3(speed, 0, speed);
@@ -32,8 +31,11 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if (other.tag == "Pickup"){
             score++;
+            Debug.Log("Score: " + score);
         }
-        Debug.Log("Score: " + score);
+        if (other.tag == "Trap"){
+            health--;
+            Debug.Log("Health: " + health);
+        }
     }
-
 }
